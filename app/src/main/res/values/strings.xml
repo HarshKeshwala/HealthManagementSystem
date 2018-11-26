@@ -3,7 +3,6 @@
     <string name="title_activity_add_patient">AddPatientActivity</string>
 
 
-
     <string-array name="departmentList">
         <item>One</item>
         <item>Two</item>
