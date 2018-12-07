@@ -11,8 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="Health Care"
-            >
+            android:label="Health Care">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,14 +19,11 @@
             </intent-filter>
         </activity>
 
-
         <activity
             android:name=".AddPatientActivity"
             android:label="Add Patient"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".AddReportActivity" />
-        <activity android:name=".ViewPatient"
-            android:theme="@style/AppTheme1" />
 
     </application>
 

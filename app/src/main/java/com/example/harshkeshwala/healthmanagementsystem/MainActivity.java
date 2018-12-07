@@ -1,5 +1,6 @@
 package com.example.harshkeshwala.healthmanagementsystem;
 
+
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 //        Toolbar  myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 //        setSupportActionBar(myToolbar);
 //        getSupportActionBar().setTitle("Health Care");
-
 
         buttonLogin = findViewById(R.id.buttonLogin);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
