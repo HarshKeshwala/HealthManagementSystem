@@ -1,4 +1,5 @@
 package com.example.harshkeshwala.healthmanagementsystem;
+
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -11,8 +12,8 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-
 public class HttpHandler {
+
     private static final String TAG = HttpHandler.class.getSimpleName();
 
     public HttpHandler() {

@@ -8,4 +8,16 @@
         <item>Two</item>
         <item>Three</item>
     </string-array>
+
+
+
+    <string-array name="patients">
+        <item>Patient 1</item>
+        <item>Patient 2</item>
+        <item>Patient 3</item>
+        <item>Patient 4</item>
+        <item>Patient 5</item>
+    </string-array>
+
+
 </resources>

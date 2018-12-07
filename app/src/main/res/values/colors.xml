@@ -9,4 +9,6 @@
 
     <color name="editTextBorder">#000000</color>
     <color name="editTextBackground">#ffffff</color>
+
+    <color name="white">#ffffff</color>
 </resources>
