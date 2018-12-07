@@ -9,112 +9,222 @@
     android:padding="20dp">
 
 
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test RestFUl API!"
+        android:textSize="20dp"
+        />
 
-    <android.support.design.widget.TextInputLayout
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+
+    <EditText
         android:id="@+id/editTextFirstname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:errorEnabled="true">
-
-
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="First Name"
-            android:inputType="text"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.TextInputLayout
+        android:ems="10"
+        android:inputType="textPersonName" />
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <EditText
         android:id="@+id/editTextLastname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:errorEnabled="true">
-
-
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Last Name"
-            android:inputType="text"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.TextInputLayout
+        android:ems="10"
+        android:inputType="textPersonName" />
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DOB"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <EditText
         android:id="@+id/editTextDob"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:errorEnabled="true">
-
-
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Date Of Birth"
-            android:inputType="text"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.TextInputLayout
+        android:ems="10"
+        android:inputType="textPersonName" />
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <EditText
         android:id="@+id/editTextAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:errorEnabled="true">
-
-
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Address"
-            android:inputType="text"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-
-
-    <android.support.design.widget.TextInputLayout
+        android:ems="10"
+        android:inputType="textPersonName" />
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Department"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/editTextDepartment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Doctor"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <EditText
         android:id="@+id/editTextDoctor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:errorEnabled="true">
-
-
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Doctor"
-            android:inputType="text"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <Spinner
-            android:id="@+id/departmentSpinner"
-            android:prompt="@string/app_name"
-            style="@style/spinner_style"/>
-
-    </LinearLayout>
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonAddPatient"
-        android:text="Add Patient"
-        android:background="@drawable/button_design"
-        android:textColor="@color/buttonColorText"/>
+        android:text="Add Patient"/>
+
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/editTextFirstname"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--app:errorEnabled="true">-->
+
+
+        <!--<android.support.design.widget.TextInputEditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="First Name"-->
+            <!--android:inputType="text"/>-->
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/editTextLastname"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--app:errorEnabled="true">-->
+
+
+        <!--<android.support.design.widget.TextInputEditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="Last Name"-->
+            <!--android:inputType="text"/>-->
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/editTextDob"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--app:errorEnabled="true">-->
+
+
+        <!--<android.support.design.widget.TextInputEditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="Date Of Birth"-->
+            <!--android:inputType="text"/>-->
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/editTextAddress"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--app:errorEnabled="true">-->
+
+
+        <!--<android.support.design.widget.TextInputEditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="Address"-->
+            <!--android:inputType="text"/>-->
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/editTextDoctor"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--app:errorEnabled="true">-->
+
+
+        <!--<android.support.design.widget.TextInputEditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="Doctor"-->
+            <!--android:inputType="text"/>-->
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/editTextDepartment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--app:errorEnabled="true">-->
+
+
+        <!--<android.support.design.widget.TextInputEditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="Department"-->
+            <!--android:inputType="text"/>-->
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+
+    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:orientation="vertical">&ndash;&gt;-->
+
+
+        <!--&lt;!&ndash;<Spinner&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/departmentSpinner"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:prompt="@string/app_name"&ndash;&gt;-->
+            <!--&lt;!&ndash;style="@style/spinner_style"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/buttonAddPatient"-->
+        <!--android:text="Add Patient"-->
+        <!--android:background="@drawable/button_design"-->
+        <!--android:textColor="@color/buttonColorText"/>-->
 </LinearLayout>

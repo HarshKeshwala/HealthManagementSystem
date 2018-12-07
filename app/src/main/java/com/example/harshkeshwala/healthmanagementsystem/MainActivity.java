@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                Intent i = new Intent(MainActivity.this, AddPatientActivity.class);
+                Intent i = new Intent(MainActivity.this, ShowPatient.class);
                 startActivity(i);
             }
         });
