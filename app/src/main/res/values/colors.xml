@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="buttonColorText">#ffffff</color>
+
+
+
+    <color name="editTextBorder">#000000</color>
+    <color name="editTextBackground">#ffffff</color>
 </resources>

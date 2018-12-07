@@ -18,13 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".AddPatientActivity"
             android:label="Add Patient"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".AddReportActivity" />
-
+        <activity android:name=".ShowPatientsActivity" />
+        <activity android:name=".PatientDetailsActivity" />
+        <activity android:name=".ShowReportActivity"></activity>
     </application>
 
 </manifest>
