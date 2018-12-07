@@ -4,41 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:gravity="center_vertical|center_horizontal"
-    android:orientation="vertical"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:padding="20dp">
+    tools:context=".ShowPatientsActivity"
+    android:padding="20dp"
+    android:orientation="vertical">
 
-    <EditText
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextUsername"
-        android:hint="Username"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/edit_text_style"/>
+        android:orientation="vertical">
 
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/showPatients">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextPassword"
-        android:hint="Password"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/edit_text_style"/>
+        </ListView>
+    </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonLogin"
-        android:text="Login"
+        android:id="@+id/buttonShowPatientDetails"
+        android:text="Show Details"
         android:padding="10dp"
         android:layout_margin="10dp"
         android:background="@drawable/button_design"
         android:textColor="@color/buttonColorText"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAddPatient"
+        android:text="Add Patient"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/button_design"
+        android:textColor="@color/buttonColorText"/>
 
 </LinearLayout>

@@ -8,11 +8,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextInputLayout textInputUsername;
-    private TextInputLayout textInputPassword;
+    private EditText textInputUsername;
+    private EditText textInputPassword;
     private Button buttonLogin;
 
     @Override
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                Intent i = new Intent(MainActivity.this, ShowPatient.class);
+                Intent i = new Intent(MainActivity.this, ShowPatientsActivity.class);
                 startActivity(i);
             }
         });
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean validateUsername(){
 
-        String inputUsername = textInputUsername.getEditText().getText().toString().trim();
+        String inputUsername = textInputUsername.getText().toString().trim();
 
         if(inputUsername.isEmpty()){
             textInputUsername.setError("Please enter username!");
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean validatePassword(){
 
-        String inputUsername = textInputPassword.getEditText().getText().toString().trim();
+        String inputUsername = textInputPassword.getText().toString().trim();
 
         if(inputUsername.isEmpty()){
             textInputPassword.setError("Please enter password!");
