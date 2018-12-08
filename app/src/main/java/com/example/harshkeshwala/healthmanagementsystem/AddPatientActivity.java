@@ -27,7 +27,8 @@ import java.net.URL;
 public class AddPatientActivity extends AppCompatActivity {
 
     private TextView mResult;
-    private EditText FirstName,LastName,DOB,Address,Department,Doctor;
+    private EditText FirstName,LastName,DOB,Address,Doctor;
+    private Spinner Department;
     String Fname,Lname,Gdob,Gaddress,GDepartment,Gdoctor;
     Button button;
   //  private Spinner departmentSpinner;
@@ -35,23 +36,25 @@ public class AddPatientActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_patient);
+        setContentView(R.layout.addpatient);
 
-//        departmentSpinner = (Spinner) findViewById(R.id.departmentSpinner);
-//        // Create an ArrayAdapter using the string array and a default spinner layout
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-//                R.array.departmentList, android.R.layout.simple_spinner_item);
-//        // Specify the layout to use when the list of choices appears
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        // Apply the adapter to the spinner
-//        departmentSpinner.setAdapter(adapter);
-        FirstName= (EditText)findViewById(R.id.editTextFirstname);
-        LastName= (EditText)findViewById(R.id.editTextLastname);
-        DOB= (EditText)findViewById(R.id.editTextDob);
-        Address= (EditText)findViewById(R.id.editTextAddress);
-        Department= (EditText)findViewById(R.id.editTextDepartment);
-        Doctor=(EditText)findViewById(R.id.editTextDoctor);
-        button= (Button) findViewById(R.id.buttonAddPatient);
+        Department=(Spinner)findViewById(R.id.departmentSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.departmentList, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        Department.setAdapter(adapter);
+        FirstName= (EditText)findViewById(R.id.firstname);
+        LastName= (EditText)findViewById(R.id.lastname);
+        DOB= (EditText)findViewById(R.id.dob);
+        Address= (EditText)findViewById(R.id.address);
+
+
+        Doctor=(EditText)findViewById(R.id.doctor);
+        button= (Button) findViewById(R.id.addpatient);
+        mResult=(TextView)findViewById(R.id.textViewresult);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +64,7 @@ public class AddPatientActivity extends AppCompatActivity {
                  Lname = LastName.getText().toString();
                  Gdob = DOB.getText().toString();
                  Gaddress=Address.getText().toString();
-                 GDepartment=Department.getText().toString();
+                 GDepartment=Department.getSelectedItem().toString();
                  Gdoctor=Doctor.getText().toString();
 
                   new PostDataTask().execute("https://nodem3.herokuapp.com/patients/");

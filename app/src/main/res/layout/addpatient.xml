@@ -13,7 +13,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextFirstName"
+        android:id="@+id/firstname"
         android:hint="First Name"
         android:padding="10dp"
         android:layout_margin="10dp"
@@ -23,7 +23,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextLastname"
+        android:id="@+id/lastname"
         android:hint="Last Name"
         android:padding="10dp"
         android:layout_margin="10dp"
@@ -33,7 +33,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextDob"
+        android:id="@+id/dob"
         android:hint="Date Of Birth"
         android:padding="10dp"
         android:layout_margin="10dp"
@@ -42,7 +42,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextAddress"
+        android:id="@+id/address"
         android:hint="Address"
         android:padding="10dp"
         android:layout_margin="10dp"
@@ -52,7 +52,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextDoctor"
+        android:id="@+id/doctor"
         android:hint="Doctor Name"
         android:padding="10dp"
         android:layout_margin="10dp"
@@ -74,14 +74,22 @@
 
     </LinearLayout>
 
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonAddPatient"
+        android:id="@+id/addpatient"
         android:text="Add Patient"
         android:padding="10dp"
         android:layout_margin="10dp"
         android:background="@drawable/button_design"
         android:textColor="@color/buttonColorText"/>
+
+    <TextView
+        android:id="@+id/textViewresult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
 
 </LinearLayout>

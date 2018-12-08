@@ -1,14 +1,11 @@
 package com.example.harshkeshwala.healthmanagementsystem;
 
+
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -30,51 +27,30 @@ import java.util.HashMap;
 
 public class ShowPatientsActivity extends AppCompatActivity {
 
-    private Button buttonAddPatient, buttonShowPatientDetails;
-    private ListView patientsList;
-    ProgressDialog pDialog;
-    String data="";
-    String TAG = "ShowPatients";
+    private ProgressDialog pDialog;
+    ListView lv;
+    String data = "";
+    String dataParsed = "";
+    String singleParsed = "";
 
-    ArrayList<HashMap<String, String>> patientArrayList;
+
+    // URL to get contacts JSON
+    private static String url = "https://nodem3.herokuapp.com/patients/";
+
+    ArrayList<HashMap<String, String>> patientList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_patients);
 
+        patientList = new ArrayList<>();
 
-        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.patients, android.R.layout.simple_list_item_1);
-        patientsList = (ListView)findViewById(R.id.showPatients);
-       // patientsList.setAdapter(adapter);
-
-        buttonAddPatient = (Button) findViewById(R.id.buttonAddPatient);
-        buttonAddPatient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(ShowPatientsActivity.this, AddPatientActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-
-        buttonShowPatientDetails = (Button) findViewById(R.id.buttonShowPatientDetails);
-        buttonShowPatientDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(ShowPatientsActivity.this, PatientDetailsActivity.class);
-                startActivity(intent);
-            }
-        });
+        lv = (ListView) findViewById(R.id.showPatients);
+        new GetPatient().execute();
     }
 
-
-
-    public class GetPatients extends AsyncTask<Void, Void, Void>
-    {
+    private class GetPatient extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -84,60 +60,58 @@ public class ShowPatientsActivity extends AppCompatActivity {
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
+
         }
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            HttpHandler sh = new HttpHandler();
-            String jsonStr = sh.makeServiceCall("http://nodem3.herokuapp.com/patients/");
 
-            if (jsonStr != null) {
-                try {
-//                    JSONObject jsonObj = new JSONObject(jsonStr);
-//
-//                    // Getting JSON Array node
-//                    JSONArray contacts = jsonObj.getJSONArray("patients");
+            try {
+                URL url = new URL("https://nodem3.herokuapp.com/patients");
 
-                    JSONArray array = new JSONArray(jsonStr);
-                    for (int i = 0; i <array.length() ; i++) {
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
-                        JSONObject jsonObject = array.optJSONObject(i);
-                        String first_name = jsonObject.optString("first_name");
-                        String last_name = jsonObject.optString("last_name");
-
-
-                        HashMap<String, String> patient = new HashMap<>();
-
-                        patient.put("first_name", first_name);
-                        patient.put("last_name", last_name);
-
-                        patientArrayList.add(patient);
-                    }
-                } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG)
-                                    .show();
-                        }
-                    });
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String line = "";
+                while(line != null) {
+                    line = bufferedReader.readLine();
+                    data = data + line;
 
                 }
-            } else {
-                Log.e(TAG, "Couldn't get json from server.");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG)
-                                .show();
-                    }
-                });
+
+                JSONArray JA = new JSONArray(data);
+
+                for (int i = 0; i <JA.length(); i++) {
+                    JSONObject JO = (JSONObject) JA.get(i);
+                    String id = JO.getString("_id");
+                    String first_name = JO.getString("first_name");
+                    String last_name = JO.getString("last_name");
+                    String dob = JO.getString("dob");
+                    String address = JO.getString("address");
+                    String department = JO.getString("department");
+                    String doctor = JO.getString("doctor");
+
+                    HashMap<String, String> patient = new HashMap<>();
+
+                    patient.put("_id", id);
+                    patient.put("first_name", first_name);
+                    patient.put("last_name", last_name);
+                    patient.put("department", department);
+
+                    patientList.add(patient);
+
+                }
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+
+
             return null;
         }
 
@@ -151,11 +125,11 @@ public class ShowPatientsActivity extends AppCompatActivity {
              * Updating parsed JSON data into ListView
              * */
             ListAdapter adapter = new SimpleAdapter(
-                    ShowPatientsActivity.this, patientArrayList,
-                    R.layout.patient_list, new String[]{"first_name"},
-                    new int[]{R.id.pName});
-
-            patientsList.setAdapter(adapter);
+                    ShowPatientsActivity.this, patientList,
+                    R.layout.list_item, new String[]{"first_name", "last_name",
+                    "department"}, new int[]{R.id.twFirstName,
+                    R.id.twLastName, R.id.twDepartment});
+            lv.setAdapter(adapter);
         }
 
     }
