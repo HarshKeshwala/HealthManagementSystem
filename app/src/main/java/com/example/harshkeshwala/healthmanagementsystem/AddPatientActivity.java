@@ -32,6 +32,7 @@ public class AddPatientActivity extends AppCompatActivity {
     //private Spinner departmentSpinner;
 
     private TextView mResult;
+    String inputFirstName, inputLastname,inputDob,inputAddress,inputDoctor;
     private EditText FirstName,LastName,DOB,Address,Doctor;
     private Spinner Department;
     String Fname,Lname,Gdob,Gaddress,GDepartment,Gdoctor;
@@ -41,6 +42,8 @@ public class AddPatientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_patient);
+
+
 
         Department=(Spinner)findViewById(R.id.departmentSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -61,6 +64,10 @@ public class AddPatientActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (!ValidateFirstname() | !Validatelastname() | !ValidateDob() | !ValidateAddress() | !ValidateDoctor()) {
+                    return;
+                }
                 Fname = FirstName.getText().toString();
                 Lname = LastName.getText().toString();
                 Gdob = DOB.getText().toString();
@@ -72,6 +79,72 @@ public class AddPatientActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    private boolean ValidateFirstname(){
+
+        inputFirstName = FirstName.getText().toString().trim();
+
+        if(inputFirstName.isEmpty()){
+            FirstName.setError("Please enter First name!");
+            return false;
+        } else {
+            FirstName.setError(null);
+            return true;
+        }
+    }
+
+    private boolean Validatelastname(){
+
+        inputLastname = LastName.getText().toString().trim();
+
+        if(inputLastname.isEmpty()){
+            LastName.setError("Please enter last name!");
+            return false;
+        } else {
+            LastName.setError(null);
+            return true;
+        }
+    }
+
+    private boolean ValidateDob(){
+
+        inputDob = DOB.getText().toString().trim();
+
+        if(inputDob.isEmpty()){
+            DOB.setError("Please enter date of Birth!");
+            return false;
+        } else {
+            DOB.setError(null);
+            return true;
+        }
+    }
+
+    private boolean ValidateAddress(){
+
+        inputAddress = Address.getText().toString().trim();
+
+        if(inputAddress.isEmpty()){
+            Address.setError("Please enter Address!");
+            return false;
+        } else {
+            Address.setError(null);
+            return true;
+        }
+    }
+
+    private boolean ValidateDoctor(){
+
+        inputDoctor = Doctor.getText().toString().trim();
+
+        if(inputDoctor.isEmpty()){
+            Doctor.setError("Please enter Doctor name!");
+            return false;
+        } else {
+            Doctor.setError(null);
+            return true;
+        }
     }
     class AddPatient extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
