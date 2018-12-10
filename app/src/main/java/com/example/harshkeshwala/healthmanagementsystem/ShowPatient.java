@@ -136,3 +136,18 @@
 //
 //    }
 //}
+//
+//import android.support.v7.app.AppCompatActivity;
+//import android.view.View;
+//
+//class act extends AppCompatActivity implements View.OnClickListener {
+//
+//    findViewById(R.id.button).setOnClickListener(this);
+//    @Override
+//    public void onClick(View v) {
+//        switch (v.getId())  {
+//            case R.id.button:
+//                break;
+//        }
+//    }
+//}

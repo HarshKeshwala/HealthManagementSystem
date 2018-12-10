@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/patientId"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:visibility="invisible"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="18dp"
+            android:text="First Name:"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:lines="2" />
+
+        <TextView
+            android:id="@+id/first_name"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="18dp"
+            android:text="Demo"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:lines="2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="18dp"
+            android:text="Last Name:"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:lines="2" />
+
+        <TextView
+            android:id="@+id/last_name"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="18dp"
+            android:text="Demo"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:lines="2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="18dp"
+            android:text="Date Of Birth:"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:lines="2" />
+
+        <TextView
+            android:id="@+id/dob"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="18dp"
+            android:text="Demo"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:lines="2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="18dp"
+            android:text="Address:"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:lines="2" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="18dp"
+            android:text="Demo"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:lines="2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="18dp"
+            android:text="Department:"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:lines="2" />
+
+        <TextView
+            android:id="@+id/department"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="18dp"
+            android:text="Demo"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:lines="2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="18dp"
+            android:text="Doctor:"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:lines="2" />
+
+        <TextView
+            android:id="@+id/doctor"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="18dp"
+            android:text="Demo"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:lines="2" />
+
+    </LinearLayout>
+</LinearLayout>
