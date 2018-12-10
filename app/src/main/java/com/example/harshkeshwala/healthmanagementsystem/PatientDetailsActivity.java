@@ -31,30 +31,24 @@ public class PatientDetailsActivity extends AppCompatActivity {
     private Button buttonShowReport;
     private TextView pId;
     String patientId;
-
-
     private ProgressDialog pDialog;
-    ListView listPatientDetail;
-
+    ListView lv;
     String data = "";
+    String dataParsed = "";
+    String singleParsed = "";
+    public static TextView mResult;
 
-    ArrayList<HashMap<String, String>> patientArrayList;
+    // URL to get contacts JSON
+    private static String url = "https://nodem3.herokuapp.com/patients/";
+    ArrayList<HashMap<String, String>> patientList;
 
-    ListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_details);
-
+        mResult = (TextView) findViewById(R.id.text);
         Intent i = getIntent();
         patientId = i.getStringExtra("pId");
-
-        patientArrayList = new ArrayList<>();
-
-        listPatientDetail = (ListView)findViewById(R.id.patientDetails);
-
-        new GetPatientDetails().execute();
-
 
         buttonShowReport = (Button) findViewById(R.id.buttonShowReport);
 
@@ -63,84 +57,168 @@ public class PatientDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(PatientDetailsActivity.this, ShowReportActivity.class);
-                intent.putExtra("pId", patientId);
+                //  intent.putExtra("pId",.getText().toString());
                 startActivity(intent);
             }
         });
-
         pId = (TextView) findViewById(R.id.pid);
 
-        //pId.setText(patientId);
+        pId.setText(patientId);
+
+        new GetDataTask().execute("https://nodem3.herokuapp.com/patients/"+patientId);
+//        fetchData process = new fetchData();
+//        process.execute();
 
     }
 
-    private class GetPatientDetails extends AsyncTask<Void, Void, Void> {
+    //    public class fetchData extends AsyncTask<Void, Void, Void> {
+//
+//        String data = "";
+//        String dataParsed = "";
+//        String singleParsed = "";
+//
+//        @Override
+//        protected Void doInBackground(Void... voids) {
+//
+//
+//            try {
+//                URL url = new URL("https://nodem3.herokuapp.com/patients/"+patientId);
+//
+//                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+//
+//                InputStream inputStream = httpURLConnection.getInputStream();
+//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+//                String line = "";
+//                while (line != null) {
+//                    line = bufferedReader.readLine();
+//                    data = data + line;
+//
+//                }
+//
+//                JSONArray JA = new JSONArray(data);
+//
+//                for (int i = 0; i < JA.length(); i++) {
+//                    JSONObject JO = (JSONObject) JA.get(i);
+//
+//                    singleParsed = "First Name: " + JO.get("first_name") + ";" + "\n" +
+//                            "Last Name: " + JO.get("last_name") + ";" + "\n" +
+//                            "Date of birth: " + JO.get("dob") + ";" + "\n" +
+//                            "address: " + JO.get("address") + ";" + "\n" +
+//                            "department " + JO.get("department") + ";" + "\n" +
+//                            "doctor: " + JO.get("doctor") + ";" + "\n" +
+//                            "ID" + JO.get("_id");
+//                    dataParsed = dataParsed + singleParsed + "\n";
+//
+//
+//                    String id = JO.getString("_id");
+//                    String first_name = JO.getString("first_name");
+//                    String last_name = JO.getString("last_name");
+//                    String dob = JO.getString("dob");
+//                    String address = JO.getString("address");
+//                    String department = JO.getString("department");
+//                    String doctor = JO.getString("doctor");
+//
+//
+//                }
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+//            super.onPostExecute(aVoid);
+//
+//            mTextViewResult.setText(this.dataParsed);
+//        }
+//    }
+    class GetDataTask extends AsyncTask<String, Void, String> {
+
+        ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
+
             super.onPreExecute();
-            // Showing progress dialog
-            pDialog = new ProgressDialog(PatientDetailsActivity.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
+
+            progressDialog = new ProgressDialog(PatientDetailsActivity.this);
+            progressDialog.setMessage("Loading data...");
+            progressDialog.show();
+
+
         }
+
         @Override
-        protected Void doInBackground(Void... arg0) {
+        protected String doInBackground(String... params) {
             try {
-                URL url = new URL("https://nodem3.herokuapp.com/patients/"+patientId);
-
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String line = "";
-
-                pId.setText(url.toString());
-                while(line != null) {
-                    line = bufferedReader.readLine();
-                    data = data + line;
-                }
-                JSONArray JA = new JSONArray(data);
-                for (int i = 0; i <JA.length(); i++) {
-                    JSONObject JO = (JSONObject) JA.get(i);
-                    String first_name = JO.getString("first_name");
-                    String last_name = JO.getString("last_name");
-                    String dob = JO.getString("dob");
-                    String address = JO.getString("address");
-                    String department = JO.getString("department");
-                    String doctor = JO.getString("doctor");
-
-                    HashMap<String, String> patient = new HashMap<>();
-                    patient.put("first_name", first_name);
-                    patient.put("last_name", last_name);
-                    patient.put("department", department);
-
-                    patientArrayList.add(patient);
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
+                return getData(params[0]);
+            } catch (IOException ex) {
+                return "Network error !";
             }
-            return null;
         }
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            // Dismiss the progress dialog
-            if (pDialog.isShowing())
-                pDialog.dismiss();
-            /**
-             * Updating parsed JSON data into ListView
-             * */
-            ListAdapter adapter = new SimpleAdapter(
-                    PatientDetailsActivity.this, patientArrayList,
-                    R.layout.patient_details, new String[]{"first_name", "last_name"}, new int[]{R.id.first_name,
-                    R.id.last_name});
-            listPatientDetail.setAdapter(adapter);
-        }
-    }
 
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            //set data responce to textview
+            mResult.setText(result);
+
+            //cancel progress dialog
+            if (progressDialog != null) {
+                progressDialog.dismiss();
+                ;
+            }
+
+        }
+
+        private String getData(String urlPath) throws IOException {
+
+            {
+
+                StringBuilder result = new StringBuilder();
+                BufferedReader bufferedReader = null;
+
+                try {
+                    URL url = new URL(urlPath);
+                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    urlConnection.setReadTimeout(10000);//ms
+                    urlConnection.setConnectTimeout(10000);//ms
+                    urlConnection.setRequestMethod("GET");
+                    urlConnection.setRequestProperty("Content-Type", "application/json");//set header
+                    urlConnection.connect();
+
+                    //Read data from server
+                    InputStream inputStream = urlConnection.getInputStream();
+                    bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        result.append(line).append("\n");
+
+                    }
+
+                } finally {
+                    {
+                        if (bufferedReader != null) {
+                            bufferedReader.close();
+                        }
+                    }
+
+
+                }
+                return result.toString();
+            }
+
+
+        }
+
+    }
 }
