@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -25,35 +24,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 public class ShowPatientsActivity extends AppCompatActivity {
-
     private ProgressDialog pDialog;
     ListView lv;
     String data = "";
-
+    String dataParsed = "";
+    String singleParsed = "";
+    // URL to get contacts JSON
+    private static String url = "https://nodem3.herokuapp.com/patients/";
     ArrayList<HashMap<String, String>> patientList;
-    private Button buttonAddPatient;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_patients);
         patientList = new ArrayList<>();
-
         lv = (ListView) findViewById(R.id.showPatients);
         new GetPatient().execute();
 
-        buttonAddPatient = (Button) findViewById(R.id.buttonAddPatient);
-
-        buttonAddPatient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(ShowPatientsActivity.this, AddPatientActivity.class);
-                startActivity(intent);
-            }
-        });
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -123,8 +110,9 @@ public class ShowPatientsActivity extends AppCompatActivity {
              * */
             ListAdapter adapter = new SimpleAdapter(
                     ShowPatientsActivity.this, patientList,
-                    R.layout.list_item, new String[]{"_id","first_name", "last_name"}, new int[]{R.id.twId,R.id.twFirstName,
-                    R.id.twLastName});
+                    R.layout.list_item, new String[]{"_id","first_name", "last_name",
+                    "department"}, new int[]{R.id.twId,R.id.twFirstName,
+                    R.id.twLastName, R.id.twDepartment});
             lv.setAdapter(adapter);
         }
     }
