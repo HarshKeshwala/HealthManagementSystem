@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,7 +45,7 @@ public class ShowReportActivity extends AppCompatActivity {
 
     ArrayList<HashMap<String, String>> reportArrayList;
     String patientID;
-
+    String patientName;
     private TextView label;
     String selectedItem;
     String record_id;
@@ -57,12 +58,16 @@ public class ShowReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_report);
 
-        final Intent i = getIntent();
+        //final Intent i = getIntent();
 
-        patientID = i.getStringExtra("pId");
+        //patientID = i.getStringExtra("pId");
+
+        SharedPreferences prefs = getSharedPreferences("Patient", MODE_PRIVATE);
+        patientID = prefs.getString("pId", null);
+        patientName = prefs.getString("fName",null);
 
         label = (TextView) findViewById(R.id.reportLabel);
-        label.setText(patientID);
+        label.setText(patientName+"'s Records: ");
 
         reportArrayList = new ArrayList<>();
         listReport = (ListView) findViewById(R.id.showReports);
@@ -75,7 +80,7 @@ public class ShowReportActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(ShowReportActivity.this, AddReportActivity.class);
-                intent.putExtra("patientId", patientID);
+                //intent.putExtra("patientId", patientID);
                 startActivity(intent);
             }
         });
@@ -101,17 +106,8 @@ public class ShowReportActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                new DeleteReport().execute("https://nodem3.herokuapp.com/patients/"+patientID+"/records/"+record_id);
 
-
-                       new DeleteReport().execute("https://nodem3.herokuapp.com/patients/"+patientID+"/records/"+record_id);
-
-
-                       Intent i = new Intent(ShowReportActivity.this, PatientDetailsActivity.class);
-                       startActivity(i);
-//                        Toast.makeText(
-//                                getApplicationContext(),
-//                                record_id + " has been removed.",
-//                                Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -237,6 +233,9 @@ public class ShowReportActivity extends AppCompatActivity {
                     getApplicationContext(),
                      "Record has been removed.",
                     Toast.LENGTH_SHORT).show();
+
+            Intent i = new Intent(ShowReportActivity.this, ShowReportActivity.class);
+            startActivity(i);
 
         }
 

@@ -1,12 +1,14 @@
 package com.example.harshkeshwala.healthmanagementsystem;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -28,11 +30,10 @@ public class ShowPatientsActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     ListView lv;
     String data = "";
-    String dataParsed = "";
-    String singleParsed = "";
-    // URL to get contacts JSON
-    private static String url = "https://nodem3.herokuapp.com/patients/";
+
     ArrayList<HashMap<String, String>> patientList;
+
+    private Button buttonAddPatient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +42,29 @@ public class ShowPatientsActivity extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.showPatients);
         new GetPatient().execute();
 
+
+        buttonAddPatient = (Button) findViewById(R.id.buttonAddPatient);
+        buttonAddPatient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(ShowPatientsActivity.this, AddPatientActivity.class);
+                startActivity(intent);
+            }
+        });
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView id = (TextView) view.findViewById(R.id.twId);
+                TextView fName = (TextView) view.findViewById(R.id.twFirstName);
                 Intent intent = new Intent(ShowPatientsActivity.this,PatientDetailsActivity.class);
-                intent.putExtra("pId",id.getText().toString());
+                //intent.putExtra("pId",id.getText().toString());
+
+                SharedPreferences.Editor editor = getSharedPreferences("Patient", MODE_PRIVATE).edit();
+                editor.putString("pId", id.getText().toString());
+                editor.putString("fName", fName.getText().toString());
+                editor.apply();
                 startActivity(intent);
             }
         });

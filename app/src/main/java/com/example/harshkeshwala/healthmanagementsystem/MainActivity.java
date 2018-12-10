@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,13 +18,17 @@ public class MainActivity extends AppCompatActivity {
     private EditText textInputPassword;
     private Button buttonLogin;
 
+    String inputUsername, inputPassword;
+
+    private ImageView imgView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Toolbar  myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-//        setSupportActionBar(myToolbar);
-//        getSupportActionBar().setTitle("Health Care");
+
+
+        imgView = (ImageView)findViewById(R.id.logo);
+        imgView.setImageResource(R.drawable.logo_image);
 
         buttonLogin = findViewById(R.id.buttonLogin);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -33,19 +39,21 @@ public class MainActivity extends AppCompatActivity {
                 textInputPassword = findViewById(R.id.editTextPassword);
 
 
+
                 if (!validateUsername() | !validatePassword()) {
                     return;
                 }
 
-                Intent i = new Intent(MainActivity.this, ShowPatientsActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(MainActivity.this, ShowPatientsActivity.class);
+                startActivity(intent);
+
             }
         });
     }
 
     private boolean validateUsername(){
 
-        String inputUsername = textInputUsername.getText().toString().trim();
+        inputUsername = textInputUsername.getText().toString().trim();
 
         if(inputUsername.isEmpty()){
             textInputUsername.setError("Please enter username!");
@@ -58,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean validatePassword(){
 
-        String inputUsername = textInputPassword.getText().toString().trim();
+        inputPassword = textInputPassword.getText().toString().trim();
 
-        if(inputUsername.isEmpty()){
+        if(inputPassword.isEmpty()){
             textInputPassword.setError("Please enter password!");
             return false;
         } else {
@@ -68,4 +76,5 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
+
 }

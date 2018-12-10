@@ -24,12 +24,17 @@
         <activity
             android:name=".AddPatientActivity"
             android:label="Add Patient"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".AddReportActivity" />
+            android:parentActivityName=".ShowPatientsActivity" />
+        <activity android:name=".AddReportActivity"
+            android:label="Add Record"
+            android:parentActivityName=".ShowReportActivity"/>
         <activity android:name=".ShowPatientsActivity"
                   android:label="Patients"/>
-        <activity android:name=".PatientDetailsActivity" />
-        <activity android:name=".ShowReportActivity"></activity>
+        <activity android:name=".PatientDetailsActivity"
+            android:label="Patient Details"
+            android:parentActivityName=".ShowPatientsActivity"/>
+        <activity android:name=".ShowReportActivity"
+            android:label="Records"></activity>
     </application>
 
 </manifest>

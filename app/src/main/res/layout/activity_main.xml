@@ -11,14 +11,22 @@
     android:focusableInTouchMode="true"
     android:padding="20dp">
 
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:id="@+id/logo"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editTextUsername"
         android:hint="Username"
         android:padding="10dp"
+        android:focusable="true"
         android:layout_margin="10dp"
-        android:background="@drawable/edit_text_style"/>
+        android:background="@drawable/edit_text_style" />
 
 
     <EditText

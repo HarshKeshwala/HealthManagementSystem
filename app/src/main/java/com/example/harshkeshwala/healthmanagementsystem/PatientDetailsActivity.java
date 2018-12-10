@@ -2,6 +2,7 @@ package com.example.harshkeshwala.healthmanagementsystem;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,7 +49,10 @@ public class PatientDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient_details);
         mResult = (TextView) findViewById(R.id.text);
         Intent i = getIntent();
-        patientId = i.getStringExtra("pId");
+        //patientId = i.getStringExtra("pId");
+
+        SharedPreferences prefs = getSharedPreferences("Patient", MODE_PRIVATE);
+        patientId = prefs.getString("pId", null);
 
         buttonShowReport = (Button) findViewById(R.id.buttonShowReport);
 
@@ -57,7 +61,7 @@ public class PatientDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(PatientDetailsActivity.this, ShowReportActivity.class);
-                //  intent.putExtra("pId",.getText().toString());
+               // intent.putExtra("pId", patientId);
                 startActivity(intent);
             }
         });
@@ -65,82 +69,11 @@ public class PatientDetailsActivity extends AppCompatActivity {
 
         pId.setText(patientId);
 
-        new GetDataTask().execute("https://nodem3.herokuapp.com/patients/"+patientId);
-//        fetchData process = new fetchData();
-//        process.execute();
+        new GetPatientDetails().execute("https://nodem3.herokuapp.com/patients/"+patientId);
 
     }
 
-    //    public class fetchData extends AsyncTask<Void, Void, Void> {
-//
-//        String data = "";
-//        String dataParsed = "";
-//        String singleParsed = "";
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//
-//
-//            try {
-//                URL url = new URL("https://nodem3.herokuapp.com/patients/"+patientId);
-//
-//                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-//
-//                InputStream inputStream = httpURLConnection.getInputStream();
-//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-//                String line = "";
-//                while (line != null) {
-//                    line = bufferedReader.readLine();
-//                    data = data + line;
-//
-//                }
-//
-//                JSONArray JA = new JSONArray(data);
-//
-//                for (int i = 0; i < JA.length(); i++) {
-//                    JSONObject JO = (JSONObject) JA.get(i);
-//
-//                    singleParsed = "First Name: " + JO.get("first_name") + ";" + "\n" +
-//                            "Last Name: " + JO.get("last_name") + ";" + "\n" +
-//                            "Date of birth: " + JO.get("dob") + ";" + "\n" +
-//                            "address: " + JO.get("address") + ";" + "\n" +
-//                            "department " + JO.get("department") + ";" + "\n" +
-//                            "doctor: " + JO.get("doctor") + ";" + "\n" +
-//                            "ID" + JO.get("_id");
-//                    dataParsed = dataParsed + singleParsed + "\n";
-//
-//
-//                    String id = JO.getString("_id");
-//                    String first_name = JO.getString("first_name");
-//                    String last_name = JO.getString("last_name");
-//                    String dob = JO.getString("dob");
-//                    String address = JO.getString("address");
-//                    String department = JO.getString("department");
-//                    String doctor = JO.getString("doctor");
-//
-//
-//                }
-//
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//
-//
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void aVoid) {
-//            super.onPostExecute(aVoid);
-//
-//            mTextViewResult.setText(this.dataParsed);
-//        }
-//    }
-    class GetDataTask extends AsyncTask<String, Void, String> {
+    class GetPatientDetails extends AsyncTask<String, Void, String> {
 
         ProgressDialog progressDialog;
 
@@ -211,8 +144,6 @@ public class PatientDetailsActivity extends AppCompatActivity {
                             bufferedReader.close();
                         }
                     }
-
-
                 }
                 return result.toString();
             }

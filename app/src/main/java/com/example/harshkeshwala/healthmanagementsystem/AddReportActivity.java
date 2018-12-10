@@ -2,6 +2,7 @@ package com.example.harshkeshwala.healthmanagementsystem;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,9 +42,11 @@ public class AddReportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_report);
 
 
-        Intent i = getIntent();
-        patientId = i.getStringExtra("patientId");
+//        Intent i = getIntent();
+//        patientId = i.getStringExtra("patientId");
 
+        SharedPreferences prefs = getSharedPreferences("Patient", MODE_PRIVATE);
+        patientId = prefs.getString("pId", null);
 
         bloodPressure = (EditText)findViewById(R.id.editTextBloodpressure);
         heartRate = (EditText)findViewById(R.id.editTextHeartrate);
@@ -65,8 +68,7 @@ public class AddReportActivity extends AppCompatActivity {
                 new AddReport().execute("http://nodem3.herokuapp.com/patients/"+patientId+"/records");
                 // new DeleteDataTask().execute("https://nodem3.herokuapp.com/patients/5c08069576474e0016fed5f1");
 
-                Intent i = new Intent(AddReportActivity.this, PatientDetailsActivity.class);
-                startActivity(i);
+
             }
         });
     }
@@ -112,6 +114,9 @@ public class AddReportActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG);
 
                 toast.show();
+
+                Intent i = new Intent(AddReportActivity.this, ShowReportActivity.class);
+                startActivity(i);
 
             }
         }
