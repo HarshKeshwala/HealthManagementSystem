@@ -35,6 +35,7 @@ public class AddReportActivity extends AppCompatActivity {
     private Button buttonAddReport;
 
     String patientId;
+    String inputblood_pressure, inputheart_rate, inputrespiratory_rate, inputblood_oxygen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +61,17 @@ public class AddReportActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+                if (!ValidateBloodOxygen() | !ValidateBloodPressure() | !ValidateHeartRate() | !ValidateRespiratory() ) {
+                   return;
+                }
+
                 blood_pressure =  bloodPressure.getText().toString();
                 heart_rate = heartRate.getText().toString();
                 respiratory_rate = respiratoryRate.getText().toString();
                 blood_oxygen = bloodOxygen.getText().toString();
 
                 new AddReport().execute("http://nodem3.herokuapp.com/patients/"+patientId+"/records");
-                // new DeleteDataTask().execute("https://nodem3.herokuapp.com/patients/5c08069576474e0016fed5f1");
 
 
             }
@@ -74,7 +79,57 @@ public class AddReportActivity extends AppCompatActivity {
     }
 
 
+    private boolean ValidateBloodPressure(){
 
+        inputblood_pressure = bloodPressure.getText().toString().trim();
+
+        if(inputblood_pressure.isEmpty()){
+            bloodPressure.setError("Please enter Blood Pressure!");
+            return false;
+        } else {
+            bloodPressure.setError(null);
+            return true;
+        }
+    }
+
+    private boolean ValidateRespiratory(){
+
+        inputrespiratory_rate = respiratoryRate.getText().toString().trim();
+
+        if(inputrespiratory_rate.isEmpty()){
+            respiratoryRate.setError("Please enter Respiratory Rate!");
+            return false;
+        } else {
+            respiratoryRate.setError(null);
+            return true;
+        }
+    }
+
+    private boolean ValidateBloodOxygen(){
+
+        inputblood_oxygen = bloodOxygen.getText().toString().trim();
+
+        if(inputblood_oxygen.isEmpty()){
+            bloodOxygen.setError("Please enter Blood Oxygen !");
+            return false;
+        } else {
+            bloodOxygen.setError(null);
+            return true;
+        }
+    }
+
+    private boolean ValidateHeartRate(){
+
+        inputheart_rate = heartRate.getText().toString().trim();
+
+        if(inputheart_rate.isEmpty()){
+            heartRate.setError("Please enter heart rate!");
+            return false;
+        } else {
+            heartRate.setError(null);
+            return true;
+        }
+    }
 
     class AddReport extends AsyncTask<String, Void, String> {
 

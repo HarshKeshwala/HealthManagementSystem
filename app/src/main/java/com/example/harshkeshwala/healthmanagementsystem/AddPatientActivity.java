@@ -42,8 +42,6 @@ public class AddPatientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_patient);
 
-
-
         Department=(Spinner)findViewById(R.id.departmentSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -75,7 +73,6 @@ public class AddPatientActivity extends AppCompatActivity {
         });
 
     }
-
     class AddPatient extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
         @Override

@@ -35,10 +35,9 @@ public class PatientDetailsActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     ListView lv;
     String data = "";
-    String dataParsed = "";
-    String singleParsed = "";
-    public static TextView mResult;
 
+    public static TextView fName, lName, dob, address, department, doctor;
+    String first_name;
     // URL to get contacts JSON
     private static String url = "https://nodem3.herokuapp.com/patients/";
     ArrayList<HashMap<String, String>> patientList;
@@ -47,9 +46,17 @@ public class PatientDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_details);
-        mResult = (TextView) findViewById(R.id.text);
-        Intent i = getIntent();
+        //Intent i = getIntent();
         //patientId = i.getStringExtra("pId");
+
+
+        fName = (TextView)findViewById(R.id.first_name);
+        lName = (TextView)findViewById(R.id.last_name);
+        dob= (TextView)findViewById(R.id.dob);
+        address = (TextView)findViewById(R.id.address);
+        department = (TextView)findViewById(R.id.department);
+        doctor = (TextView)findViewById(R.id.doctor);
+
 
         SharedPreferences prefs = getSharedPreferences("Patient", MODE_PRIVATE);
         patientId = prefs.getString("pId", null);
@@ -67,89 +74,62 @@ public class PatientDetailsActivity extends AppCompatActivity {
         });
         pId = (TextView) findViewById(R.id.pid);
 
-        pId.setText(patientId);
+      //  pId.setText(patientId);
 
-        new GetPatientDetails().execute("https://nodem3.herokuapp.com/patients/"+patientId);
+        new GetPatientDetails().execute();
 
     }
 
-    class GetPatientDetails extends AsyncTask<String, Void, String> {
-
-        ProgressDialog progressDialog;
-
+    private class GetPatientDetails extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-
             super.onPreExecute();
-
-            progressDialog = new ProgressDialog(PatientDetailsActivity.this);
-            progressDialog.setMessage("Loading data...");
-            progressDialog.show();
-
-
+            // Showing progress dialog
+            pDialog = new ProgressDialog(PatientDetailsActivity.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
         }
-
         @Override
-        protected String doInBackground(String... params) {
+        protected Void doInBackground(Void... arg0) {
             try {
-                return getData(params[0]);
-            } catch (IOException ex) {
-                return "Network error !";
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            //set data responce to textview
-            mResult.setText(result);
-
-            //cancel progress dialog
-            if (progressDialog != null) {
-                progressDialog.dismiss();
-                ;
-            }
-
-        }
-
-        private String getData(String urlPath) throws IOException {
-
-            {
-
-                StringBuilder result = new StringBuilder();
-                BufferedReader bufferedReader = null;
-
-                try {
-                    URL url = new URL(urlPath);
-                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                    urlConnection.setReadTimeout(10000);//ms
-                    urlConnection.setConnectTimeout(10000);//ms
-                    urlConnection.setRequestMethod("GET");
-                    urlConnection.setRequestProperty("Content-Type", "application/json");//set header
-                    urlConnection.connect();
-
-                    //Read data from server
-                    InputStream inputStream = urlConnection.getInputStream();
-                    bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                    String line;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        result.append(line).append("\n");
-
-                    }
-
-                } finally {
-                    {
-                        if (bufferedReader != null) {
-                            bufferedReader.close();
-                        }
-                    }
+                URL url = new URL("https://nodem3.herokuapp.com/patients/"+patientId);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String line = "";
+                while(line != null) {
+                    line = bufferedReader.readLine();
+                    data = data + line;
                 }
-                return result.toString();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            // Dismiss the progress dialog
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+
+            try {
+                JSONObject jsonObject = new JSONObject(data);
+                fName.setText(jsonObject.getString("first_name"));
+                lName.setText(jsonObject.getString("last_name"));
+                dob.setText(jsonObject.getString("dob"));
+                address.setText(jsonObject.getString("address"));
+                department.setText(jsonObject.getString("department"));
+                doctor.setText(jsonObject.getString("doctor"));
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
             }
 
-
         }
-
     }
 }

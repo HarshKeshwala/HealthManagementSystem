@@ -34,7 +34,8 @@
             android:label="Patient Details"
             android:parentActivityName=".ShowPatientsActivity"/>
         <activity android:name=".ShowReportActivity"
-            android:label="Records"></activity>
+            android:label="Records"
+            android:parentActivityName=".PatientDetailsActivity"></activity>
     </application>
 
 </manifest>
