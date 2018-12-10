@@ -43,12 +43,27 @@ public class MainActivity extends AppCompatActivity {
                 if (!validateUsername() | !validatePassword()) {
                     return;
                 }
+                else {
+                    if(textInputUsername.getText().toString().equals("admin") && textInputPassword.getText().toString().equals("admin")){
+                        Intent intent = new Intent(MainActivity.this, ShowPatientsActivity.class);
+                        startActivity(intent);
 
-                Intent intent = new Intent(MainActivity.this, ShowPatientsActivity.class);
-                startActivity(intent);
+                        //correcct password
+                    }else{
+                        //wrong password
+
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "Incorrect Username or Password",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+
 
             }
         });
+
+
     }
 
     private boolean validateUsername(){

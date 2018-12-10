@@ -4,11 +4,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="departmentList">
-        <item>One</item>
-        <item>Two</item>
-        <item>Three</item>
-    </string-array>
-
+    <item>Psychiatry</item>
+    <item>Cardiology</item>
+    <item>Haematology</item>
+    <item>Neurology</item>
+    <item>Gastroenterology</item>
+</string-array>
 
 
     <string-array name="patients">
